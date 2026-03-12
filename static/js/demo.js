@@ -304,6 +304,7 @@
     zeroPos1 = 0; zeroPos2 = 0;
     syncSliders();
     updateStatus("Reset to origin");
+    updatePointCloud._fitted = false;   // re-fit camera on next predict
     predict();
   }
 
