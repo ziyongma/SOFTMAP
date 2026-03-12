@@ -142,11 +142,14 @@
     var geom = new THREE.BufferGeometry();
     var n = isEmpty ? 1 : nVerts;
     var pos  = new Float32Array(n * 3);
+    var col  = new Float32Array(n * 3);
     geom.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    geom.setAttribute("color",    new THREE.BufferAttribute(col, 3));
     var mat  = new THREE.PointsMaterial({
       size: POINT_SIZE_PX,
       sizeAttenuation: false,
-      color: isEmpty ? 0x555560 : 0x33c77f,
+      vertexColors: !isEmpty,
+      color: isEmpty ? 0x555560 : 0xffffff,
     });
     points = new THREE.Points(geom, mat);
     scene.add(points);
@@ -178,13 +181,18 @@
   function updatePointCloud(vertices) {
     var geom = points.geometry;
     var attr = geom.getAttribute("position");
+    var colAttr = geom.getAttribute("color");
 
     if (attr.count !== nVerts) {
       geom.setAttribute("position",
         new THREE.BufferAttribute(new Float32Array(nVerts * 3), 3));
-      attr = geom.getAttribute("position");
+      geom.setAttribute("color",
+        new THREE.BufferAttribute(new Float32Array(nVerts * 3), 3));
+      attr    = geom.getAttribute("position");
+      colAttr = geom.getAttribute("color");
     }
 
+    /* Center vertices */
     var cx = 0, cy = 0, cz = 0;
     for (var i = 0; i < nVerts; i++) {
       cx += vertices[i * 3];
@@ -193,14 +201,29 @@
     }
     cx /= nVerts; cy /= nVerts; cz /= nVerts;
 
+    /* Find Y range for rainbow mapping */
+    var yMin = Infinity, yMax = -Infinity;
     for (var i = 0; i < nVerts; i++) {
-      attr.setXYZ(i,
-        vertices[i * 3]     - cx,
-        vertices[i * 3 + 1] - cy,
-        vertices[i * 3 + 2] - cz
-      );
+      var y = vertices[i * 3 + 1] - cy;
+      if (y < yMin) yMin = y;
+      if (y > yMax) yMax = y;
+    }
+    var yRange = yMax - yMin || 1;
+
+    var tmpColor = new THREE.Color();
+    for (var i = 0; i < nVerts; i++) {
+      var px = vertices[i * 3]     - cx;
+      var py = vertices[i * 3 + 1] - cy;
+      var pz = vertices[i * 3 + 2] - cz;
+      attr.setXYZ(i, px, py, pz);
+
+      /* Rainbow: map Y position to hue 0..1 */
+      var t = (py - yMin) / yRange;
+      tmpColor.setHSL(t * 0.83, 0.9, 0.55);  // hue 0 (red) to 0.83 (violet)
+      colAttr.setXYZ(i, tmpColor.r, tmpColor.g, tmpColor.b);
     }
     attr.needsUpdate = true;
+    colAttr.needsUpdate = true;
     geom.computeBoundingSphere();
 
     if (!updatePointCloud._fitted) {
