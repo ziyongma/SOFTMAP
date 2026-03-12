@@ -2,489 +2,373 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
+  <meta name="description" content="SOFTMAP: Sim2Real Soft Robot Forward Modeling via Topological Mesh Alignment and Physics Prior">
+  <meta name="keywords" content="SOFTMAP, soft robot, sim-to-real, forward modeling, ARAP, mesh alignment, teleoperation, IROS 2026">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nerfies: Deformable Neural Radiance Fields</title>
+  <title>SOFTMAP: Sim2Real Soft Robot Forward Modeling</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
-
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
 </head>
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a>
-
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</nav>
-
-
+<!-- ==================== HERO ==================== -->
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Nerfies: Deformable Neural Radiance Fields</h1>
+          <h1 class="title is-1 publication-title">SOFTMAP</h1>
+          <h2 class="subtitle is-3 publication-title">Sim2Real Soft Robot Forward Modeling via<br>Topological Mesh Alignment and Physics Prior</h2>
+
           <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://keunhong.com">Keunhong Park</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="https://utkarshsinha.com">Utkarsh Sinha</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://jonbarron.info">Jonathan T. Barron</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://sofienbouaziz.com">Sofien Bouaziz</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.danbgoldman.com">Dan B Goldman</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://homes.cs.washington.edu/~seitz/">Steven M. Seitz</a><sup>1,2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="http://www.ricardomartinbrualla.com">Ricardo Martin-Brualla</a><sup>2</sup>
-            </span>
+            <h3 class="title is-4 conference-authors"><a style="color: firebrick;">Under Review</a></h3>
+            <span class="author-block">Ziyong&nbsp;Ma<sup>1</sup>,</span>
+            <span class="author-block">Uksang&nbsp;Yoo<sup>1</sup>,</span>
+            <span class="author-block">Jonathan&nbsp;Francis<sup>1,2</sup>,</span>
+            <span class="author-block">Weiming&nbsp;Zhi<sup>*,3,4,5</sup>,</span>
+            <span class="author-block">Jeffrey&nbsp;Ichnowski<sup>*,1</sup>,</span>
+            <span class="author-block">Jean&nbsp;Oh<sup>*,1</sup></span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>University of Washington,</span>
-            <span class="author-block"><sup>2</sup>Google Research</span>
+            <span class="author-block"><sup>1</sup>Robotics Institute, Carnegie Mellon University,</span>
+            <span class="author-block"><sup>2</sup>Bosch Center for AI,</span>
+            <span class="author-block"><sup>3,4</sup>University of Sydney,</span>
+            <span class="author-block"><sup>5</sup>Vanderbilt University</span>
+          </div>
+
+          <div class="is-size-6" style="margin-top: 0.5rem; font-style: italic;">
+            <sup>*</sup> Equal Advising
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <!-- PDF Link. -->
               <span class="link-block">
-                <a href="https://arxiv.org/pdf/2011.12948"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
+                <a href="#" class="external-link button is-normal is-rounded is-dark" disabled style="pointer-events: none; opacity: 0.5;">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper <span style="font-size: 0.8em; color: #bbb;">(coming soon)</span></span>
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2011.12948"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
+                <a href="#" class="external-link button is-normal is-rounded is-dark" disabled style="pointer-events: none; opacity: 0.5;">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv <span style="font-size: 0.8em; color: #bbb;">(coming soon)</span></span>
                 </a>
               </span>
-              <!-- Video Link. -->
               <span class="link-block">
-                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
+                <a href="#" class="external-link button is-normal is-rounded is-dark" disabled style="pointer-events: none; opacity: 0.5;">
+                  <span class="icon"><i class="fab fa-youtube"></i></span>
+                  <span>Video <span style="font-size: 0.8em; color: #bbb;">(coming soon)</span></span>
                 </a>
               </span>
-              <!-- Code Link. -->
               <span class="link-block">
-                <a href="https://github.com/google/nerfies"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
+                <a href="#" class="external-link button is-normal is-rounded is-dark" disabled style="pointer-events: none; opacity: 0.5;">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code <span style="font-size: 0.8em; color: #bbb;">(coming soon)</span></span>
+                </a>
               </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
-                  </a>
             </div>
-
           </div>
+
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="hero teaser">
+<!-- ==================== TEASER VIDEO ==================== -->
+<section class="section" style="padding-top: 0; padding-bottom: 2rem;">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4"
-                type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
-      </h2>
+    <div class="columns is-centered">
+      <div class="column is-10 has-text-centered">
+        <video autoplay muted loop playsinline controls preload="metadata" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+          <source src="./static/video/SOFTMAP-FINAL-VIDEO.mp4" type="video/mp4">
+        </video>
+        <p class="is-size-6" style="margin-top: 1rem; color: #666;">
+          <b>SOFTMAP</b> enables real-time 3D forward modeling of soft finger manipulators by combining simulation pretraining with lightweight residual correction, achieving accurate shape prediction for downstream trajectory tracking and teleoperation.
+        </p>
+      </div>
     </div>
-  </div>
-</section>
-
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-mask">
-          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-coffee">
-          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-toby">
-          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
+    <div class="columns is-centered" style="margin-top: 1.5rem;">
+      <div class="column is-10 has-text-centered">
+        <img src="./static/images/overall-pic-1.png" alt="SOFTMAP overview" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.12);">
+        <p class="is-size-7" style="margin-top: 0.5rem; color: #555;"><b>Overview.</b> SOFTMAP combines simulation pretraining, ARAP-based topological alignment, and residual correction to achieve accurate real-time 3D shape prediction, trajectory tracking, and vision-based teleoperation of soft finger manipulators.</p>
       </div>
     </div>
   </div>
 </section>
 
-
+<!-- ==================== INTERACTIVE DEMO ==================== -->
 <section class="section">
   <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            We present the first method capable of photorealistically reconstructing a non-rigidly
-            deforming scene using photos/videos captured casually from mobile phones.
-          </p>
-          <p>
-            Our approach augments neural radiance fields
-            (NeRF) by optimizing an
-            additional continuous volumetric deformation field that warps each observed point into a
-            canonical 5D NeRF.
-            We observe that these NeRF-like deformation fields are prone to local minima, and
-            propose a coarse-to-fine optimization method for coordinate-based models that allows for
-            more robust optimization.
-            By adapting principles from geometry processing and physical simulation to NeRF-like
-            models, we propose an elastic regularization of the deformation field that further
-            improves robustness.
-          </p>
-          <p>
-            We show that <span class="dnerf">Nerfies</span> can turn casually captured selfie
-            photos/videos into deformable NeRF
-            models that allow for photorealistic renderings of the subject from arbitrary
-            viewpoints, which we dub <i>"nerfies"</i>. We evaluate our method by collecting data
-            using a
-            rig with two mobile phones that take time-synchronized photos, yielding train/validation
-            images of the same pose at different viewpoints. We show that our method faithfully
-            reconstructs non-rigidly deforming scenes and reproduces unseen views with high
-            fidelity.
-          </p>
-        </div>
-      </div>
+    <h2 class="title is-2" style="text-align: center;">Interactive Demo</h2>
+    <div class="content has-text-centered">
+      <p style="color: #666;">Control the virtual soft finger using the sliders or keyboard. The learned forward model predicts the full 3D shape in real time.</p>
     </div>
-    <!--/ Abstract. -->
 
-    <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div id="demo-container" class="demo-viewer-container">
+      <!-- Canvas wrapper with HUD overlay -->
+      <div class="demo-canvas-wrap">
+        <canvas id="demo-canvas"></canvas>
+
+        <!-- Click-to-activate overlay -->
+        <div id="demo-activate-overlay" class="demo-activate-overlay">
+          <div class="demo-activate-prompt">
+            <i class="fas fa-hand-pointer"></i>
+            <span>Click to activate keyboard controls</span>
+          </div>
+        </div>
+
+        <!-- HUD: top-left status -->
+        <div class="demo-hud demo-hud-top-left">
+          <div id="demo-status" class="demo-hud-status"></div>
+        </div>
+
+        <!-- HUD: bottom-left — arrow keys -->
+        <div class="demo-hud demo-hud-bottom-left">
+          <div class="demo-hud-label">Fine &plusmn;100</div>
+          <div class="demo-key-grid">
+            <span class="demo-key" data-key="ArrowUp">&uarr;</span>
+            <span class="demo-key" data-key="ArrowLeft">&larr;</span>
+            <span class="demo-key" data-key="ArrowDown">&darr;</span>
+            <span class="demo-key" data-key="ArrowRight">&rarr;</span>
+          </div>
+          <div class="demo-hud-label" style="margin-top:6px;">Coarse &plusmn;1000</div>
+          <div class="demo-key-grid">
+            <span class="demo-key" data-key="w">W</span>
+            <span class="demo-key" data-key="a">A</span>
+            <span class="demo-key" data-key="s">S</span>
+            <span class="demo-key" data-key="d">D</span>
+          </div>
+        </div>
+
+        <!-- HUD: bottom-right — action keys -->
+        <div class="demo-hud demo-hud-bottom-right">
+          <div class="demo-key-row"><span class="demo-key demo-key-wide" data-key="r">R</span> <span class="demo-key-desc">Set zero</span></div>
+          <div class="demo-key-row"><span class="demo-key demo-key-wide" data-key=" ">Space</span> <span class="demo-key-desc">Go to zero</span></div>
+          <div class="demo-key-row"><span class="demo-key demo-key-wide" data-key="c">C</span> <span class="demo-key-desc">Reset</span></div>
+        </div>
+
+        <!-- HUD: bottom-center — servo readout -->
+        <div class="demo-hud demo-hud-bottom-center">
+          <span class="demo-servo-label">S1</span>
+          <input id="servo-slider-1" type="range" min="-7000" max="7000" value="0" step="100" class="demo-servo-slider">
+          <span id="servo-label-1" class="demo-servo-val">0</span>
+          <span class="demo-servo-sep"></span>
+          <span class="demo-servo-label">S2</span>
+          <input id="servo-slider-2" type="range" min="-7000" max="7000" value="0" step="100" class="demo-servo-slider">
+          <span id="servo-label-2" class="demo-servo-val">0</span>
+        </div>
+
+        <!-- HUD: top-right — mouse hint -->
+        <div class="demo-hud demo-hud-top-right">
+          <span class="demo-hint-text">Drag to rotate &middot; Scroll to zoom</span>
         </div>
       </div>
     </div>
-    <!--/ Paper video. -->
   </div>
 </section>
 
-
+<!-- ==================== ABSTRACT ==================== -->
 <section class="section">
   <div class="container is-max-desktop">
-
-    <div class="columns is-centered">
-
-      <!-- Visual Effects. -->
-      <div class="column">
-        <div class="content">
-          <h2 class="title is-3">Visual Effects</h2>
-          <p>
-            Using <i>nerfies</i> you can create fun visual effects. This Dolly zoom effect
-            would be impossible without nerfies since it would require going through a wall.
-          </p>
-          <video id="dollyzoom" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/dollyzoom-stacked.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-      </div>
-      <!--/ Visual Effects. -->
-
-      <!-- Matting. -->
-      <div class="column">
-        <h2 class="title is-3">Matting</h2>
-        <div class="columns is-centered">
-          <div class="column content">
-            <p>
-              As a byproduct of our method, we can also solve the matting problem by ignoring
-              samples that fall outside of a bounding box during rendering.
-            </p>
-            <video id="matting-video" controls playsinline height="100%">
-              <source src="./static/videos/matting.mp4"
-                      type="video/mp4">
-            </video>
-          </div>
-
-        </div>
-      </div>
+    <h2 class="title is-2" style="text-align: center;">Abstract</h2>
+    <div class="content has-text-justified">
+      <p style="font-size: 0.95rem; line-height: 1.6;">
+        While soft robot manipulators offer compelling advantages over rigid counterparts, including inherent compliance, safe human-robot interaction, and the ability to conform to complex geometries, accurate forward modeling from low-dimensional actuation commands remains an open challenge due to nonlinear material phenomena such as hysteresis and manufacturing variability. We present <b>SOFTMAP</b>, a sim-to-real learning framework for real-time 3D forward modeling of tendon-actuated soft finger manipulators. SOFTMAP combines four components: (1) As-Rigid-As-Possible (ARAP)-based topological alignment that projects simulated and real point clouds into a shared, topologically consistent vertex space; (2) a lightweight MLP forward model pretrained on simulation data to map servo commands to full 3D finger geometry; (3) a residual correction network trained on a small set of real observations to predict per-vertex displacement fields that compensate for sim-to-real discrepancies; and (4) a closed-form linear actuation calibration layer enabling real-time inference at 30&nbsp;FPS. We evaluate SOFTMAP on both simulated and physical hardware, achieving state-of-the-art shape prediction accuracy with a Chamfer distance of 0.389&nbsp;mm in simulation and 3.786&nbsp;mm on hardware, millimeter-level fingertip trajectory tracking across multiple target paths, and a 36.5% improvement in teleoperation task success over the baseline.
+      </p>
     </div>
-    <!--/ Matting. -->
-
-    <!-- Animation. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Animation</h2>
-
-        <!-- Interpolating. -->
-        <h3 class="title is-4">Interpolating states</h3>
-        <div class="content has-text-justified">
-          <p>
-            We can also animate the scene by interpolating the deformation latent codes of two input
-            frames. Use the slider here to linearly interpolate between the left frame and the right
-            frame.
-          </p>
-        </div>
-        <div class="columns is-vcentered interpolation-panel">
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_start.jpg"
-                 class="interpolation-image"
-                 alt="Interpolate start reference image."/>
-            <p>Start Frame</p>
-          </div>
-          <div class="column interpolation-video-column">
-            <div id="interpolation-image-wrapper">
-              Loading...
-            </div>
-            <input class="slider is-fullwidth is-large is-info"
-                   id="interpolation-slider"
-                   step="1" min="0" max="100" value="0" type="range">
-          </div>
-          <div class="column is-3 has-text-centered">
-            <img src="./static/images/interpolate_end.jpg"
-                 class="interpolation-image"
-                 alt="Interpolation end reference image."/>
-            <p class="is-bold">End Frame</p>
-          </div>
-        </div>
-        <br/>
-        <!--/ Interpolating. -->
-
-        <!-- Re-rendering. -->
-        <h3 class="title is-4">Re-rendering the input video</h3>
-        <div class="content has-text-justified">
-          <p>
-            Using <span class="dnerf">Nerfies</span>, you can re-render a video from a novel
-            viewpoint such as a stabilized camera by playing back the training deformations.
-          </p>
-        </div>
-        <div class="content has-text-centered">
-          <video id="replay-video"
-                 controls
-                 muted
-                 preload
-                 playsinline
-                 width="75%">
-            <source src="./static/videos/replay.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <!--/ Re-rendering. -->
-
-      </div>
-    </div>
-    <!--/ Animation. -->
-
-
-    <!-- Concurrent Work. -->
-    <div class="columns is-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Related Links</h2>
-
-        <div class="content has-text-justified">
-          <p>
-            There's a lot of excellent work that was introduced around the same time as ours.
-          </p>
-          <p>
-            <a href="https://arxiv.org/abs/2104.09125">Progressive Encoding for Neural Optimization</a> introduces an idea similar to our windowed position encoding for coarse-to-fine optimization.
-          </p>
-          <p>
-            <a href="https://www.albertpumarola.com/research/D-NeRF/index.html">D-NeRF</a> and <a href="https://gvv.mpi-inf.mpg.de/projects/nonrigid_nerf/">NR-NeRF</a>
-            both use deformation fields to model non-rigid scenes.
-          </p>
-          <p>
-            Some works model videos with a NeRF by directly modulating the density, such as <a href="https://video-nerf.github.io/">Video-NeRF</a>, <a href="https://www.cs.cornell.edu/~zl548/NSFF/">NSFF</a>, and <a href="https://neural-3d-video.github.io/">DyNeRF</a>
-          </p>
-          <p>
-            There are probably many more by the time you are reading this. Check out <a href="https://dellaert.github.io/NeRF/">Frank Dellart's survey on recent NeRF papers</a>, and <a href="https://github.com/yenchenlin/awesome-NeRF">Yen-Chen Lin's curated list of NeRF papers</a>.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Concurrent Work. -->
-
   </div>
 </section>
 
+<!-- ==================== METHOD / PIPELINE ==================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-2" style="text-align: center;">Method</h2>
+    <div class="content has-text-justified">
+      <p style="font-size: 0.95rem; line-height: 1.6;">
+        SOFTMAP combines ARAP-based alignment, simulation pretraining, residual correction, and actuation calibration into a unified pipeline for accurate sim-to-real forward modeling.
+      </p>
+    </div>
+    <div class="has-text-centered" style="margin-bottom: 1rem;">
+      <img src="./static/images/modelpipeline.png" alt="SOFTMAP pipeline diagram" style="width: 80%; max-width: 400px; height: auto; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.12);" />
+      <p class="has-text-centered is-size-7" style="margin-top: 0.3rem; color: #555; font-size: 0.83rem;"><b>SOFTMAP pipeline.</b> Simulation data and real multi-view images are independently processed into 3D representations, then encoded via ARAP into a shared topologically consistent vertex space. A learned MLP maps servo commands to 3D shape predictions, refined by a residual correction network for downstream trajectory generation and teleoperation.</p>
+    </div>
+  </div>
+  <div class="container is-max-desktop">
+    <!-- Simulation + Real Setup -->
+    <div class="columns is-centered" style="margin-top: 2rem;">
+      <div class="column is-5 has-text-centered">
+        <img src="./static/images/simulation-data-1.png" alt="Simulation environment" style="width: 100%; border-radius: 8px;">
+        <p class="is-size-7" style="margin-top: 0.5rem; color: #555;"><b>Simulation.</b> The soft finger is modeled in SOFA Framework using a Neo-Hookean hyperelastic material with four embedded tendons.</p>
+      </div>
+      <div class="column is-5 has-text-centered">
+        <img src="./static/images/real-world-data-1.png" alt="Real-world data collection setup" style="width: 100%; border-radius: 8px;">
+        <p class="is-size-7" style="margin-top: 0.5rem; color: #555;"><b>Real-world data collection.</b> Two RGB cameras capture synchronized multi-view images of the soft finger for 3D reconstruction.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<section class="section" id="BibTeX">
+<!-- ==================== RESULTS ==================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-2" style="text-align: center;">Results</h2>
+
+    <!-- Shape Prediction -->
+    <h3 class="title is-4">Shape Prediction</h3>
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <img src="./static/images/shape-pred-results-1.png" alt="Shape prediction comparison" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+      <p class="is-size-7" style="margin-top: 0.5rem; color: #555;"><b>Evaluation comparison.</b> Left: Point cloud comparisons in simulation; Right: Point cloud comparisons in real data.</p>
+    </div>
+
+    <div class="table-container" style="margin-bottom: 2rem;">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Chamfer &darr; (mm)</th>
+            <th>Mean Vertex &darr; (mm)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="3" style="background: #f5f5f5; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em;"><em>Simulation</em></td></tr>
+          <tr><td>Laplacian-Encoded</td><td>8.739 &plusmn; 3.67</td><td>8.757 &plusmn; 4.811</td></tr>
+          <tr><td>DeepSoRo</td><td>4.520 &plusmn; 2.437</td><td>7.970 &plusmn; 4.127</td></tr>
+          <tr><td>Linear Model</td><td>2.726 &plusmn; 1.043</td><td>2.620 &plusmn; 1.143</td></tr>
+          <tr><td>XGBoost</td><td>1.28 &plusmn; 0.58</td><td>0.868 &plusmn; 0.563</td></tr>
+          <tr><td>ARAP-Encoded</td><td>0.867 &plusmn; 0.53</td><td>0.438 &plusmn; 0.274</td></tr>
+          <tr style="background: #eef3ff;"><td><b>SOFTMAP (Ours)</b></td><td><b>0.389 &plusmn; 0.188</b></td><td><b>0.196 &plusmn; 0.098</b></td></tr>
+          <tr><td colspan="3" style="background: #f5f5f5; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em;"><em>Real</em></td></tr>
+          <tr><td>DeepSoRo</td><td>6.386 &plusmn; 1.367</td><td>&mdash;</td></tr>
+          <tr><td>SOFTMAP (w/o residual)</td><td>5.681 &plusmn; 0.939</td><td>&mdash;</td></tr>
+          <tr style="background: #eef3ff;"><td><b>SOFTMAP (Ours)</b></td><td><b>3.786 &plusmn; 0.61</b></td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Trajectory Tracking -->
+    <h3 class="title is-4">Trajectory Tracking</h3>
+    <div class="has-text-centered" style="margin-bottom: 1.5rem;">
+      <div class="video-placeholder" style="max-width: 800px; margin: 0 auto;">
+        <i class="fas fa-play-circle"></i>
+        <p>Trajectory Tracking Video</p>
+      </div>
+      <!-- Replace with: <video src="./static/video/trajectory_tracking.mp4" controls loop muted playsinline style="width: 100%; max-width: 800px; margin: 0 auto; border-radius: 8px;"></video> -->
+      <p class="is-size-7" style="margin-top: 0.5rem; color: #555;"><b>Qualitative trajectory tracking.</b> Each column shows snapshots for trajectories S, H, O, and E, comparing SOFTMAP against DeepSoRo and simulation ground truth.</p>
+    </div>
+    <div class="table-container" style="margin-bottom: 2rem;">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th>Trajectory</th>
+            <th>Method</th>
+            <th>Sim MSE (mm)</th>
+            <th>Sim Max (mm)</th>
+            <th>Real MSE (mm)</th>
+            <th>Real Max (mm)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="2">Letter S</td><td>DeepSoRo</td><td>2.685 &plusmn; 1.109</td><td>3.646</td><td>5.917 &plusmn; 5.12</td><td>23.154</td></tr>
+          <tr style="background: #eef3ff;"><td><b>SOFTMAP</b></td><td><b>1.124 &plusmn; 0.617</b></td><td><b>1.95</b></td><td><b>3.458 &plusmn; 2.976</b></td><td><b>15.38</b></td></tr>
+          <tr><td rowspan="2">Letter H</td><td>DeepSoRo</td><td>2.766 &plusmn; 0.999</td><td>4.319</td><td>5.854 &plusmn; 3.816</td><td>14.7</td></tr>
+          <tr style="background: #eef3ff;"><td><b>SOFTMAP</b></td><td><b>1.214 &plusmn; 0.652</b></td><td><b>2.55</b></td><td><b>3.569 &plusmn; 2.343</b></td><td><b>10.3</b></td></tr>
+          <tr><td rowspan="2">Letter O</td><td>DeepSoRo</td><td>1.336 &plusmn; 0.918</td><td>1.582</td><td>3.164 &plusmn; 1.683</td><td>6.887</td></tr>
+          <tr style="background: #eef3ff;"><td><b>SOFTMAP</b></td><td><b>1.184 &plusmn; 0.182</b></td><td><b>1.499</b></td><td><b>1.387 &plusmn; 0.831</b></td><td><b>3.839</b></td></tr>
+          <tr><td rowspan="2">Letter E</td><td>DeepSoRo</td><td>1.889 &plusmn; 0.92</td><td>3.015</td><td>4.791 &plusmn; 3.174</td><td>14.76</td></tr>
+          <tr style="background: #eef3ff;"><td><b>SOFTMAP</b></td><td><b>1.174 &plusmn; 0.755</b></td><td><b>2.509</b></td><td><b>2.616 &plusmn; 1.777</b></td><td><b>8.05</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Teleoperation -->
+    <h3 class="title is-4">Teleoperation</h3>
+    <div class="columns is-centered" style="margin-bottom: 1.5rem;">
+      <div class="column is-5 has-text-centered">
+        <div class="video-placeholder">
+          <i class="fas fa-play-circle"></i>
+          <p>Teleoperation Demo</p>
+        </div>
+        <!-- Replace with: <video src="./static/video/teleop_demo.mp4" controls loop muted playsinline style="width: 100%; border-radius: 8px;"></video> -->
+        <p class="is-size-7" style="margin-top: 0.5rem; color: #555;"><b>Vision-based teleoperation.</b> </p>
+      </div>
+      <div class="column is-5 has-text-centered">
+        <div class="video-placeholder">
+          <i class="fas fa-play-circle"></i>
+          <p>Push Tasks</p>
+        </div>
+        <!-- Replace with: <video src="./static/video/teleop_tasks.mp4" controls loop muted playsinline style="width: 100%; border-radius: 8px;"></video> -->
+        <p class="is-size-7" style="margin-top: 0.5rem; color: #555;"><b>Push tasks.</b> </p>
+      </div>
+    </div>
+
+    <div class="table-container" style="margin-bottom: 2rem;">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Method</th>
+            <th>IoU &uarr;</th>
+            <th>Overlap &uarr; (%)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td rowspan="2">Push-T</td><td>DeepSoRo</td><td>0.38 &plusmn; 0.26</td><td>46 &plusmn; 27</td></tr>
+          <tr style="background: #eef3ff;"><td><b>SOFTMAP</b></td><td><b>0.72 &plusmn; 0.13</b></td><td><b>80 &plusmn; 11</b></td></tr>
+          <tr><td rowspan="2">Cube</td><td>DeepSoRo</td><td>0.63 &plusmn; 0.16</td><td>71 &plusmn; 15</td></tr>
+          <tr style="background: #eef3ff;"><td><b>SOFTMAP</b></td><td><b>0.80 &plusmn; 0.10</b></td><td><b>87 &plusmn; 8</b></td></tr>
+          <tr><td rowspan="2">Tri. Prism</td><td>DeepSoRo</td><td>0.55 &plusmn; 0.10</td><td>67 &plusmn; 6.5</td></tr>
+          <tr style="background: #eef3ff;"><td><b>SOFTMAP</b></td><td><b>0.61 &plusmn; 0.18</b></td><td><b>72 &plusmn; 15</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BIBTEX ==================== -->
+<!-- <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{park2021nerfies,
-  author    = {Park, Keunhong and Sinha, Utkarsh and Barron, Jonathan T. and Bouaziz, Sofien and Goldman, Dan B and Seitz, Steven M. and Martin-Brualla, Ricardo},
-  title     = {Nerfies: Deformable Neural Radiance Fields},
-  journal   = {ICCV},
-  year      = {2021},
+    <h2 class="title is-2" style="text-align: center;">BibTeX</h2>
+    <div style="position: relative;">
+      <button class="button is-small is-light copy-btn" id="copy-bibtex" title="Copy to clipboard" style="position: absolute; top: 8px; right: 8px; z-index: 1;">
+        <span class="icon is-small"><i class="fas fa-copy"></i></span>
+      </button>
+      <pre><code id="bibtex-code">@inproceedings{ma2026softmap,
+  title     = {SOFTMAP: Sim2Real Soft Robot Forward Modeling via Topological Mesh Alignment and Physics Prior},
+  author    = {Ma, Ziyong and Yoo, Uksang and Francis, Jonathan and Zhi, Weiming and Ichnowski, Jeffrey and Oh, Jean},
+  year      = {2026},
 }</code></pre>
+    </div>
   </div>
-</section>
+</section> -->
 
-
-<footer class="footer">
+<!-- ==================== FOOTER ==================== -->
+<footer class="footer" style="padding: 2rem 1.5rem;">
   <div class="container">
     <div class="content has-text-centered">
-      <a class="icon-link"
-         href="./static/videos/nerfies_paper.pdf">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This website is licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-          <p>
-            This means you are free to borrow the <a
-              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,
-            we just ask that you link back to this page in the footer.
-            Please remember to remove the analytics code included in the header of the website which
-            you do not want on your website.
-          </p>
-        </div>
-      </div>
+      <p style="font-size: 0.85rem; color: #888;">
+        SOFTMAP &mdash; Carnegie Mellon University &bull; IROS 2026
+      </p>
+      <p style="font-size: 0.8rem; color: #aaa;">
+        Website template adapted from <a href="https://nerfies.github.io" target="_blank">Nerfies</a>.
+        Licensed under <a href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.
+      </p>
     </div>
   </div>
 </footer>
 
+<script src="./static/js/index.js"></script>
+
+<!-- Interactive demo dependencies -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.17.0/dist/ort.min.js"></script>
+<script src="./static/js/demo.js"></script>
 </body>
 </html>

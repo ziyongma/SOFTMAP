@@ -1,157 +1,297 @@
+/* ============================================================
+   SOFTMAP — Project Page Stylesheet
+   Clean academic research style
+   ============================================================ */
+
 body {
   font-family: 'Noto Sans', sans-serif;
 }
 
-
-.footer .icon-link {
-    font-size: 25px;
-    color: #000;
-}
-
-.link-block a {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.dnerf {
-  font-variant: small-caps;
-}
-
-
-.teaser .hero-body {
-  padding-top: 0;
-  padding-bottom: 3rem;
-}
-
-.teaser {
+.publication-title {
   font-family: 'Google Sans', sans-serif;
 }
 
-
-.publication-title {
-}
-
-.publication-banner {
-  max-height: parent;
-
-}
-
-.publication-banner video {
-  position: relative;
-  left: auto;
-  top: auto;
-  transform: none;
-  object-fit: fit;
-}
-
-.publication-header .hero-body {
-}
-
-.publication-title {
-    font-family: 'Google Sans', sans-serif;
-}
-
 .publication-authors {
-    font-family: 'Google Sans', sans-serif;
-}
-
-.publication-venue {
-    color: #555;
-    width: fit-content;
-    font-weight: bold;
-}
-
-.publication-awards {
-    color: #ff3860;
-    width: fit-content;
-    font-weight: bolder;
-}
-
-.publication-authors {
+  font-family: 'Google Sans', sans-serif;
 }
 
 .publication-authors a {
-   color: hsl(204, 86%, 53%) !important;
+  color: hsl(204, 86%, 53%) !important;
 }
 
 .publication-authors a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .author-block {
   display: inline-block;
 }
 
-.publication-banner img {
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-.publication-authors {
-  /*color: #4286f4;*/
+/* ---------- Figure Placeholders ---------- */
+.figure-placeholder {
+  background: #f9f9f9;
+  border: 2px dashed #ddd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 30px;
+  color: #bbb;
+}
+.figure-placeholder.wide {
+  padding: 50px 30px;
+}
+.figure-placeholder.small {
+  padding: 40px 20px;
 }
 
-.publication-video {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: 56.25%;
-
-    overflow: hidden;
-    border-radius: 10px !important;
+/* ---------- Video Placeholders ---------- */
+.video-placeholder {
+  aspect-ratio: 16 / 9;
+  background: #1a1a1a;
+  border: 2px dashed #444;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+}
+.video-placeholder i {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  opacity: 0.7;
+}
+.video-placeholder p {
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-.publication-video iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+.figure-placeholder i {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+.figure-placeholder p {
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-.publication-body img {
+/* ---------- Demo Placeholder ---------- */
+.demo-placeholder-box {
+  background: #fafafa;
+  border: 2px dashed #ddd;
+  border-radius: 10px;
+  padding: 60px 30px;
+  text-align: center;
 }
 
-.results-carousel {
+/* ---------- Interactive Demo Viewer ---------- */
+.demo-viewer-container {
+  border-radius: 12px;
   overflow: hidden;
 }
 
-.results-carousel .item {
-  margin: 5px;
+/* Canvas wrapper — positions the HUD overlays */
+.demo-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  background: #111118;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #bbb;
-  border-radius: 10px;
-  padding: 0;
-  font-size: 0;
+  cursor: grab;
 }
-
-.results-carousel video {
-  margin: 0;
-}
-
-
-.interpolation-panel {
-  background: #f5f5f5;
-  border-radius: 10px;
-}
-
-.interpolation-panel .interpolation-image {
+.demo-canvas-wrap:active { cursor: grabbing; }
+.demo-canvas-wrap canvas {
+  display: block;
   width: 100%;
+  height: 100%;
+}
+
+/* ---------- Click-to-activate overlay ---------- */
+.demo-activate-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.35);
+  z-index: 10;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.demo-activate-overlay.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.demo-activate-prompt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.demo-activate-prompt i { font-size: 1.2rem; }
+
+/* ---------- HUD shared ---------- */
+.demo-hud {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  color: rgba(255,255,255,0.75);
+  font-family: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.demo-hud-top-left {
+  top: 12px; left: 14px;
+}
+.demo-hud-top-right {
+  top: 12px; right: 14px;
+}
+.demo-hud-bottom-left {
+  bottom: 14px; left: 14px;
+}
+.demo-hud-bottom-right {
+  bottom: 14px; right: 14px;
+}
+.demo-hud-bottom-center {
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  pointer-events: auto;
+}
+
+/* Status line */
+.demo-hud-status {
+  background: rgba(0,0,0,0.45);
+  padding: 4px 10px;
   border-radius: 5px;
+  white-space: nowrap;
 }
 
-.interpolation-video-column {
+/* Mouse hint */
+.demo-hint-text {
+  background: rgba(0,0,0,0.35);
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.5);
 }
 
-.interpolation-panel .slider {
-  margin: 0 !important;
+/* ---------- HUD Key Indicators ---------- */
+.demo-hud-label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 3px;
 }
 
-.interpolation-panel .slider {
-  margin: 0 !important;
+.demo-key-grid {
+  display: grid;
+  grid-template-columns: 30px 30px;
+  grid-template-rows: 26px 26px;
+  gap: 3px;
+}
+/* Re-arrange into cross: top-center, left, right, bottom-center */
+.demo-key-grid .demo-key:nth-child(1) { grid-column: 1 / 3; justify-self: center; }
+.demo-key-grid .demo-key:nth-child(2) { grid-column: 1; }
+.demo-key-grid .demo-key:nth-child(3) { grid-column: 2; }
+.demo-key-grid .demo-key:nth-child(4) { grid-column: 1 / 3; justify-self: center; }
+
+.demo-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 26px;
+  height: 24px;
+  padding: 0 5px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  transition: background 0.1s, color 0.1s, transform 0.08s;
+}
+.demo-key.is-pressed {
+  background: rgba(51,199,127,0.5);
+  color: #fff;
+  border-color: rgba(51,199,127,0.7);
+  transform: scale(0.92);
 }
 
-#interpolation-image-wrapper {
-  width: 100%;
+.demo-key-wide {
+  min-width: 42px;
 }
-#interpolation-image-wrapper img {
-  border-radius: 5px;
+
+.demo-key-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.demo-key-desc {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ---------- HUD Servo Sliders ---------- */
+.demo-servo-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+}
+.demo-servo-val {
+  font-size: 0.68rem;
+  color: rgba(51,199,127,0.9);
+  min-width: 40px;
+  text-align: right;
+}
+.demo-servo-sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(255,255,255,0.15);
+  margin: 0 4px;
+}
+.demo-servo-slider {
+  width: 100px;
+  height: 4px;
+  cursor: pointer;
+  accent-color: #33c77f;
+}
+
+@media (max-width: 600px) {
+  .demo-canvas-wrap { height: 380px; }
+  .demo-hud-bottom-left,
+  .demo-hud-bottom-right { display: none; }
+  .demo-servo-slider { width: 70px; }
+}
+
+/* ---------- Copy BibTeX Button ---------- */
+.copy-btn {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.copy-btn:hover {
+  color: hsl(204, 86%, 53%);
 }
