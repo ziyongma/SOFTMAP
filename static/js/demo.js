@@ -123,7 +123,7 @@
 
   function initScene(isEmpty) {
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x111118);
+    scene.background = new THREE.Color(0xffffff);
 
     var w = canvasWrap.clientWidth;
     var h = canvasWrap.clientHeight;

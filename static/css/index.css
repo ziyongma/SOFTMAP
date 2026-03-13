@@ -102,7 +102,7 @@ body {
   position: relative;
   width: 100%;
   height: 520px;
-  background: #111118;
+  background: #ffffff;
   border-radius: 12px;
   overflow: hidden;
   cursor: grab;
@@ -121,7 +121,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0,0,0,0.35);
+  background: rgba(255,255,255,0.5);
   z-index: 10;
   cursor: pointer;
   transition: opacity 0.3s;
@@ -135,11 +135,11 @@ body {
   align-items: center;
   gap: 10px;
   padding: 14px 28px;
-  background: rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.06);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.18);
+  border: 1px solid rgba(0,0,0,0.12);
   border-radius: 10px;
-  color: #fff;
+  color: #333;
   font-size: 0.95rem;
   font-weight: 500;
 }
@@ -150,7 +150,7 @@ body {
   position: absolute;
   z-index: 5;
   pointer-events: none;
-  color: rgba(255,255,255,0.75);
+  color: rgba(0,0,0,0.6);
   font-family: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
   font-size: 0.72rem;
   line-height: 1.4;
@@ -182,19 +182,20 @@ body {
 
 /* Status line */
 .demo-hud-status {
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.06);
   padding: 4px 10px;
   border-radius: 5px;
   white-space: nowrap;
+  color: rgba(0,0,0,0.55);
 }
 
 /* Mouse hint */
 .demo-hint-text {
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.06);
   padding: 3px 8px;
   border-radius: 4px;
   font-size: 0.68rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(0,0,0,0.4);
 }
 
 /* ---------- HUD Key Indicators ---------- */
@@ -202,7 +203,7 @@ body {
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: rgba(255,255,255,0.45);
+  color: rgba(0,0,0,0.4);
   margin-bottom: 3px;
 }
 
@@ -225,18 +226,18 @@ body {
   min-width: 26px;
   height: 24px;
   padding: 0 5px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.15);
   border-radius: 4px;
   font-size: 0.7rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.7);
+  color: rgba(0,0,0,0.55);
   transition: background 0.1s, color 0.1s, transform 0.08s;
 }
 .demo-key.is-pressed {
-  background: rgba(51,199,127,0.5);
-  color: #fff;
-  border-color: rgba(51,199,127,0.7);
+  background: rgba(51,199,127,0.35);
+  color: #1a7a45;
+  border-color: rgba(51,199,127,0.6);
   transform: scale(0.92);
 }
 
@@ -252,32 +253,32 @@ body {
 }
 .demo-key-desc {
   font-size: 0.65rem;
-  color: rgba(255,255,255,0.45);
+  color: rgba(0,0,0,0.4);
 }
 
 /* ---------- HUD Servo Sliders ---------- */
 .demo-servo-label {
   font-size: 0.68rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.5);
+  color: rgba(0,0,0,0.45);
 }
 .demo-servo-val {
   font-size: 0.68rem;
-  color: rgba(51,199,127,0.9);
+  color: #1a7a45;
   min-width: 40px;
   text-align: right;
 }
 .demo-servo-sep {
   width: 1px;
   height: 14px;
-  background: rgba(255,255,255,0.15);
+  background: rgba(0,0,0,0.12);
   margin: 0 4px;
 }
 .demo-servo-slider {
   width: 100px;
   height: 4px;
   cursor: pointer;
-  accent-color: #33c77f;
+  accent-color: #2a9d5c;
 }
 
 @media (max-width: 600px) {
