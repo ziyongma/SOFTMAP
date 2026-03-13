@@ -186,6 +186,22 @@
   </div>
 </section>
 
+<!-- ==================== CONTRIBUTIONS ==================== -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-2" style="text-align: center;">Contributions</h2>
+    <div class="content has-text-justified">
+      <ul style="font-size: 0.95rem; line-height: 1.7;">
+        <li><b>ARAP-based topological alignment.</b> We propose using As-Rigid-As-Possible (ARAP) deformation to project both simulated meshes and real-world point clouds into a shared, topologically consistent vertex space, enabling direct vertex-level supervision across domains.</li>
+        <li><b>Sim-pretrained forward model.</b> A lightweight MLP, pretrained entirely on simulation data, maps low-dimensional servo commands to full 3D finger geometry, providing a strong shape prior without requiring real-world training data.</li>
+        <li><b>Residual correction network.</b> A small correction network, trained on a limited set of real observations, predicts per-vertex displacement fields that compensate for sim-to-real discrepancies such as material hysteresis and manufacturing variability.</li>
+        <li><b>Closed-form actuation calibration.</b> A linear calibration layer aligns real servo commands to their simulation-equivalent inputs, enabling real-time inference at 30&nbsp;FPS without iterative optimization.</li>
+        <li><b>State-of-the-art results.</b> SOFTMAP achieves a Chamfer distance of 0.389&nbsp;mm in simulation and 3.786&nbsp;mm on real hardware, millimeter-level fingertip trajectory tracking, and a 36.5% improvement in teleoperation task success over the baseline.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <!-- ==================== METHOD / PIPELINE ==================== -->
 <section class="section">
   <div class="container is-max-desktop">
