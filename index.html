@@ -18,6 +18,9 @@
 
 <!-- ==================== HERO ==================== -->
 <section class="hero">
+  <video id="hero-bg-video" class="hero-video-bg" src="./static/video/SOFTMAP-FINAL-VIDEO.mp4" autoplay muted loop playsinline></video>
+  <div class="hero-overlay"></div>
+  <div class="hero-scroll-indicator">&#8595;</div>
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -86,7 +89,7 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-10 has-text-centered">
-        <video autoplay muted loop playsinline controls preload="metadata" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
+        <video id="teaser-video" autoplay muted loop playsinline controls preload="metadata" style="width: 100%; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);">
           <source src="./static/video/SOFTMAP-FINAL-VIDEO.mp4" type="video/mp4">
         </video>
         <p class="is-size-6" style="margin-top: 1rem; color: #666;">
@@ -271,11 +274,7 @@
     <!-- Trajectory Tracking -->
     <h3 class="title is-4">Trajectory Tracking</h3>
     <div class="has-text-centered" style="margin-bottom: 1.5rem;">
-      <div class="video-placeholder" style="max-width: 800px; margin: 0 auto;">
-        <i class="fas fa-play-circle"></i>
-        <p>Trajectory Tracking Video</p>
-      </div>
-      <!-- Replace with: <video src="./static/video/trajectory_tracking.mp4" controls loop muted playsinline style="width: 100%; max-width: 800px; margin: 0 auto; border-radius: 8px;"></video> -->
+      <video src="./static/video/trajectory-video.mp4" controls loop muted playsinline style="width: 100%; max-width: 800px; margin: 0 auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);"></video>
       <p class="is-size-7" style="margin-top: 0.5rem; color: #555;"><b>Qualitative trajectory tracking.</b> Each column shows snapshots for trajectories S, H, O, and E, comparing SOFTMAP against DeepSoRo and simulation ground truth.</p>
     </div>
     <div class="table-container" style="margin-bottom: 2rem;">
@@ -305,24 +304,36 @@
 
     <!-- Teleoperation -->
     <h3 class="title is-4">Teleoperation</h3>
-    <div class="columns is-centered" style="margin-bottom: 1.5rem;">
-      <div class="column is-5 has-text-centered">
-        <div class="video-placeholder">
-          <i class="fas fa-play-circle"></i>
-          <p>Teleoperation Demo</p>
-        </div>
-        <!-- Replace with: <video src="./static/video/teleop_demo.mp4" controls loop muted playsinline style="width: 100%; border-radius: 8px;"></video> -->
-        <p class="is-size-7" style="margin-top: 0.5rem; color: #555;"><b>Vision-based teleoperation.</b> </p>
-      </div>
-      <div class="column is-5 has-text-centered">
-        <div class="video-placeholder">
-          <i class="fas fa-play-circle"></i>
-          <p>Push Tasks</p>
-        </div>
-        <!-- Replace with: <video src="./static/video/teleop_tasks.mp4" controls loop muted playsinline style="width: 100%; border-radius: 8px;"></video> -->
-        <p class="is-size-7" style="margin-top: 0.5rem; color: #555;"><b>Push tasks.</b> </p>
-      </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.5rem;">
+      <video id="teleop-v1" src="./static/video/teleop/cameras.mov"   autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v2" src="./static/video/teleop/cameras 2.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v3" src="./static/video/teleop/cameras 3.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v4" src="./static/video/teleop/cameras 4.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v5" src="./static/video/teleop/cameras 5.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v6" src="./static/video/teleop/cameras 6.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v7" src="./static/video/teleop/cameras 7.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v8" src="./static/video/teleop/cameras 8.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v9" src="./static/video/teleop/cameras 9.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
     </div>
+    <script>
+      // Set playback rate so each clip runs ~5 s (rate = duration / 5)
+      var teleopRates = {
+        'teleop-v1': 5.11,  // cameras.mov    25.6 s
+        'teleop-v2': 4.27,  // cameras 2.mov  21.4 s
+        'teleop-v3': 1.52,  // cameras 3.mov   7.6 s
+        'teleop-v4': 6.92,  // cameras 4.mov  34.6 s
+        'teleop-v5': 4.66,  // cameras 5.mov  23.3 s
+        'teleop-v6': 0.91,  // cameras 6.mov   4.6 s
+        'teleop-v7': 4.01,  // cameras 7.mov  20.0 s
+        'teleop-v8': 2.87,  // cameras 8.mov  14.3 s
+        'teleop-v9': 4.60   // cameras 9.mov  23.0 s
+      };
+      Object.entries(teleopRates).forEach(function([id, rate]) {
+        var el = document.getElementById(id);
+        el.playbackRate = rate;
+        el.addEventListener('loadedmetadata', function() { el.playbackRate = rate; });
+      });
+    </script>
 
     <div class="table-container" style="margin-bottom: 2rem;">
       <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
@@ -380,6 +391,51 @@
 </footer>
 
 <script src="./static/js/index.js"></script>
+
+<script>
+  /* Keep teaser video in sync with the hero background video */
+  (function () {
+    var SYNC_THRESHOLD = 0.3; // seconds of drift before correcting
+
+    var START_TIME = 5; // skip first 5 seconds
+
+    function syncVideos() {
+      var src = document.getElementById('hero-bg-video');
+      var dst = document.getElementById('teaser-video');
+      if (!src || !dst) return;
+
+      /* Jump both to START_TIME once metadata is available */
+      function seekToStart(v) {
+        if (v.readyState >= 1) {
+          v.currentTime = START_TIME;
+        } else {
+          v.addEventListener('loadedmetadata', function () {
+            v.currentTime = START_TIME;
+          }, { once: true });
+        }
+      }
+      seekToStart(src);
+      seekToStart(dst);
+
+      src.addEventListener('timeupdate', function () {
+        if (Math.abs(dst.currentTime - src.currentTime) > SYNC_THRESHOLD) {
+          dst.currentTime = src.currentTime;
+        }
+      });
+
+      /* If the user manually seeks the teaser, mirror it back to the hero */
+      dst.addEventListener('seeking', function () {
+        src.currentTime = dst.currentTime;
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', syncVideos);
+    } else {
+      syncVideos();
+    }
+  })();
+</script>
 
 <!-- Interactive demo dependencies -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

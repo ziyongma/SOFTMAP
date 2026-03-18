@@ -40,6 +40,11 @@
   var zeroPos1 = 0, zeroPos2 = 0;
   var keyboardActive = false;
 
+  /* Base-pinning state */
+  var BASE_FRACTION = 0.20;   // bottom 20% of vertices are treated as the fixed base
+  var baseAnchor  = null;     // {x,y,z} mean of base verts at t=0 (world space)
+  var baseIndices = null;     // sorted vertex indices belonging to the base
+
   /* ---- Three.js objects ---- */
   var scene, camera, renderer, controls, points;
   var canvasWrap;
@@ -178,6 +183,22 @@
     if (renderer) renderer.render(scene, camera);
   }
 
+  /* Identify the bottom BASE_FRACTION of vertices (by raw Y) as the fixed base. */
+  function initBase(vertices) {
+    var order = [];
+    for (var i = 0; i < nVerts; i++) order.push([i, vertices[i * 3 + 1]]);
+    order.sort(function (a, b) { return a[1] - b[1]; });
+    var n = Math.max(1, Math.round(nVerts * BASE_FRACTION));
+    baseIndices = order.slice(0, n).map(function (v) { return v[0]; });
+
+    var bx = 0, by = 0, bz = 0;
+    for (var k = 0; k < baseIndices.length; k++) {
+      var j = baseIndices[k];
+      bx += vertices[j * 3]; by += vertices[j * 3 + 1]; bz += vertices[j * 3 + 2];
+    }
+    baseAnchor = { x: bx / n, y: by / n, z: bz / n };
+  }
+
   function updatePointCloud(vertices) {
     var geom = points.geometry;
     var attr = geom.getAttribute("position");
@@ -192,34 +213,40 @@
       colAttr = geom.getAttribute("color");
     }
 
-    /* Center vertices */
-    var cx = 0, cy = 0, cz = 0;
-    for (var i = 0; i < nVerts; i++) {
-      cx += vertices[i * 3];
-      cy += vertices[i * 3 + 1];
-      cz += vertices[i * 3 + 2];
-    }
-    cx /= nVerts; cy /= nVerts; cz /= nVerts;
+    /* Initialise base on first frame */
+    if (!baseIndices) initBase(vertices);
 
-    /* Find Y range for rainbow mapping */
+    /* Compute current mean of base vertices */
+    var bx = 0, by = 0, bz = 0, n = baseIndices.length;
+    for (var k = 0; k < n; k++) {
+      var j = baseIndices[k];
+      bx += vertices[j * 3]; by += vertices[j * 3 + 1]; bz += vertices[j * 3 + 2];
+    }
+    /* Offset that pins the base back to its anchor position */
+    var offX = baseAnchor.x - bx / n;
+    var offY = baseAnchor.y - by / n;
+    var offZ = baseAnchor.z - bz / n;
+
+    /* Find Y range (with offset applied) for rainbow mapping */
     var yMin = Infinity, yMax = -Infinity;
     for (var i = 0; i < nVerts; i++) {
-      var y = vertices[i * 3 + 1] - cy;
+      var y = vertices[i * 3 + 1] + offY;
       if (y < yMin) yMin = y;
       if (y > yMax) yMax = y;
     }
     var yRange = yMax - yMin || 1;
 
+    /* Write display positions (base anchored at origin) and colours */
     var tmpColor = new THREE.Color();
     for (var i = 0; i < nVerts; i++) {
-      var px = vertices[i * 3]     - cx;
-      var py = vertices[i * 3 + 1] - cy;
-      var pz = vertices[i * 3 + 2] - cz;
+      var px = vertices[i * 3]     + offX - baseAnchor.x;
+      var py = vertices[i * 3 + 1] + offY - baseAnchor.y;
+      var pz = vertices[i * 3 + 2] + offZ - baseAnchor.z;
       attr.setXYZ(i, px, py, pz);
 
-      /* Rainbow: map Y position to hue 0..1 */
-      var t = (py - yMin) / yRange;
-      tmpColor.setHSL(t * 0.83, 0.9, 0.55);  // hue 0 (red) to 0.83 (violet)
+      /* Rainbow: hue 0 (red, base) → 0.83 (violet, tip) */
+      var t = (vertices[i * 3 + 1] + offY - yMin) / yRange;
+      tmpColor.setHSL(t * 0.83, 0.9, 0.55);
       colAttr.setXYZ(i, tmpColor.r, tmpColor.g, tmpColor.b);
     }
     attr.needsUpdate = true;
@@ -328,6 +355,7 @@
     syncSliders();
     updateStatus("Reset to origin");
     updatePointCloud._fitted = false;   // re-fit camera on next predict
+    baseIndices = null; baseAnchor = null;  // re-detect base from new zero position
     predict();
   }
 
