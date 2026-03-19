@@ -13,12 +13,27 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.svg">
+  <style>
+    .hero-video-bg { position:absolute; inset:0; z-index:0; background:#000; }
+    .hero-video-bg video {
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:contain;
+      opacity:0;
+      transition:none;
+    }
+    .hero-video-bg video.is-active { opacity:1; }
+  </style>
 </head>
 <body>
 
 <!-- ==================== HERO ==================== -->
 <section class="hero">
-  <video id="hero-bg-video" class="hero-video-bg" src="./static/video/SOFTMAP-FINAL-VIDEO.mp4" autoplay muted loop playsinline></video>
+  <div class="hero-video-bg">
+    <video class="is-active" autoplay muted playsinline><source src="./static/video/demo/demo1.mp4" type="video/mp4"></video>
+    <video muted playsinline><source src="./static/video/demo/demo2.mp4" type="video/mp4"></video>
+    <video muted playsinline><source src="./static/video/demo/demo3.mp4" type="video/mp4"></video>
+  </div>
   <div class="hero-overlay"></div>
   <div class="hero-scroll-indicator">&#8595;</div>
   <div class="hero-body">
@@ -30,7 +45,7 @@
 
           <div class="is-size-5 publication-authors">
             <h3 class="title is-4 conference-authors"><a style="color: firebrick;">Under Review</a></h3>
-            <span class="author-block">Ziyong&nbsp;Ma<sup>1</sup>,</span>
+            <span class="author-block">Ziyong&nbsp;Ma<sup></i>,1</sup>,</span>
             <span class="author-block">Uksang&nbsp;Yoo<sup>1</sup>,</span>
             <span class="author-block">Jonathan&nbsp;Francis<sup>1,2</sup>,</span>
             <span class="author-block">Weiming&nbsp;Zhi<sup>*,3,4,5</sup>,</span>
@@ -39,22 +54,20 @@
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Robotics Institute, Carnegie Mellon University,</span>
-            <span class="author-block"><sup>2</sup>Bosch Center for AI,</span>
-            <span class="author-block"><sup>3,4</sup>University of Sydney,</span>
-            <span class="author-block"><sup>5</sup>Vanderbilt University</span>
-          </div>
-
-          <div class="is-size-6" style="margin-top: 0.5rem; font-style: italic;">
-            <sup>*</sup> Equal Advising
+            <span class="author-block"><sup>1</sup>Robotics Institute, Carnegie Mellon University, USA;</span>
+            <span class="author-block"><sup>2</sup>Bosch Center for Artificial Intelligence, USA;</span>
+            <span class="author-block"><sup>3</sup>School of Computer Science, The University of Sydney, Australia;</span>
+            <span class="author-block"><sup>4</sup>Australian Centre for Robotics, The University of Sydney, Australia;</span>
+            <span class="author-block"><sup>5</sup>College of Connected Computing, Vanderbilt University, USA;</span>
+            <span class="author-block"><sup>*</sup>Equal Advising.</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark" disabled style="pointer-events: none; opacity: 0.5;">
+                <a href="./static/scripts/assets/SOFTMAP____Arxiv_version (1).pdf" target="_blank" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                  <span>Paper <span style="font-size: 0.8em; color: #bbb;">(coming soon)</span></span>
+                  <span>Paper</span>
                 </a>
               </span>
               <span class="link-block">
@@ -306,15 +319,15 @@
     <!-- Teleoperation -->
     <h3 class="title is-4">Teleoperation</h3>
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.5rem;">
-      <video id="teleop-v1" src="./static/video/teleop/cameras.mov"   autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
-      <video id="teleop-v2" src="./static/video/teleop/cameras 2.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
-      <video id="teleop-v3" src="./static/video/teleop/cameras 3.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
-      <video id="teleop-v4" src="./static/video/teleop/cameras 4.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
-      <video id="teleop-v5" src="./static/video/teleop/cameras 5.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
-      <video id="teleop-v6" src="./static/video/teleop/cameras 6.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
-      <video id="teleop-v7" src="./static/video/teleop/cameras 7.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
-      <video id="teleop-v8" src="./static/video/teleop/cameras 8.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
-      <video id="teleop-v9" src="./static/video/teleop/cameras 9.mov" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v1" src="./static/video/teleop/cameras.mp4"   autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v2" src="./static/video/teleop/cameras 2.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v3" src="./static/video/teleop/cameras 3.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v4" src="./static/video/teleop/cameras 4.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v5" src="./static/video/teleop/cameras 5.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v6" src="./static/video/teleop/cameras 6.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v7" src="./static/video/teleop/cameras 7.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v8" src="./static/video/teleop/cameras 8.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
+      <video id="teleop-v9" src="./static/video/teleop/cameras 9.mp4" autoplay muted loop playsinline style="width: 100%; border-radius: 8px;"></video>
     </div>
     <script>
       // Set playback rate so each clip runs ~5 s (rate = duration / 5)
@@ -394,46 +407,46 @@
 <script src="./static/js/index.js"></script>
 
 <script>
-  /* Keep teaser video in sync with the hero background video */
+  /* Hero background: play videos one at a time, cycle on ended */
   (function () {
-    var SYNC_THRESHOLD = 0.3; // seconds of drift before correcting
+    var videos = Array.from(document.querySelectorAll('.hero-video-bg video'));
+    var current = 0;
 
-    var START_TIME = 5; // skip first 5 seconds
-
-    function syncVideos() {
-      var src = document.getElementById('hero-bg-video');
-      var dst = document.getElementById('teaser-video');
-      if (!src || !dst) return;
-
-      /* Jump both to START_TIME once metadata is available */
-      function seekToStart(v) {
-        if (v.readyState >= 1) {
-          v.currentTime = START_TIME;
-        } else {
-          v.addEventListener('loadedmetadata', function () {
-            v.currentTime = START_TIME;
-          }, { once: true });
-        }
-      }
-      seekToStart(src);
-      seekToStart(dst);
-
-      src.addEventListener('timeupdate', function () {
-        if (Math.abs(dst.currentTime - src.currentTime) > SYNC_THRESHOLD) {
-          dst.currentTime = src.currentTime;
-        }
-      });
-
-      /* If the user manually seeks the teaser, mirror it back to the hero */
-      dst.addEventListener('seeking', function () {
-        src.currentTime = dst.currentTime;
-      });
+    function advance() {
+      var prev = current;
+      current = (current + 1) % videos.length;
+      videos[prev].classList.remove('is-active');
+      videos[prev].pause();
+      videos[prev].currentTime = 0;
+      videos[current].currentTime = 0;
+      videos[current].play();
+      videos[current].classList.add('is-active');
     }
 
+    videos.forEach(function (v) { v.addEventListener('ended', advance); });
+    videos[0].play();
+  })();
+</script>
+
+<script>
+  /* Start teaser video at 5 s to skip intro */
+  (function () {
+    var START_TIME = 5;
+    function initTeaser() {
+      var v = document.getElementById('teaser-video');
+      if (!v) return;
+      if (v.readyState >= 1) {
+        v.currentTime = START_TIME;
+      } else {
+        v.addEventListener('loadedmetadata', function () {
+          v.currentTime = START_TIME;
+        }, { once: true });
+      }
+    }
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', syncVideos);
+      document.addEventListener('DOMContentLoaded', initTeaser);
     } else {
-      syncVideos();
+      initTeaser();
     }
   })();
 </script>

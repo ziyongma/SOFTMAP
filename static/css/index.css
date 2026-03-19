@@ -3,6 +3,12 @@
    Clean academic research style
    ============================================================ */
 
+html, body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
 body {
   font-family: 'Noto Sans', sans-serif;
 }
@@ -12,19 +18,40 @@ body {
   position: relative;
   overflow: hidden;
   min-height: 100vh;
+  width: 100%;
   background: #000;
 }
 
 .hero-video-bg {
   position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 1800px;
-  height: 100%;
-  object-fit: cover;
+  inset: 0;
   z-index: 0;
+  display: flex;
+  flex-direction: column;
+  background: #000;
+}
+
+/* demo1 — top section, change vh to resize */
+.hero-vid-top {
+  flex: 0 0 20vh;   /* ← change 20vh to control demo1 height */
+  width: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+/* bottom row wrapper */
+.hero-vid-bottom-row {
+  flex: 1;           /* fills remaining height */
+  display: flex;
+  gap: 3px;
+}
+
+/* demo2 & demo3 */
+.hero-vid-bottom-row video {
+  flex: 1;
+  min-width: 0;
+  object-fit: contain;
+  background: #000;
 }
 
 /* Bottom-only gradient: video stays vivid at top, darkens toward text */
